@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: gt-walsheim-black;
+    src: url('/fonts/GTWalsheimPro-Black.ttf');
+  }
+  @font-face {
+    font-family: gt-walsheim-bold;
+    src: url('/fonts/GTWalsheimPro-Bold.ttf');
+  }
+  @font-face {
+    font-family: gt-walsheim-light;
+    src: url('/fonts/GTWalsheimPro-Light.ttf');
+  }
+  @font-face {
+    font-family: gt-walsheim-medium;
+    src: url('/fonts/GTWalsheimPro-Medium.ttf');
+  }
+  @font-face {
+    font-family: gt-walsheim-regular;
+    src: url('/fonts/GTWalsheimPro-Regular.ttf');
+  }
+  @font-face {
+    font-family: gt-walsheim-thin;
+    src: url('/fonts/GTWalsheimPro-Thin.ttf');
+  }
+
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+}
+
+@layer base {
+   
+    input[type="text"],
+    input[type="tel"],
+    input[type="password"],
+    input[type="email"],
+    input[type="search"],
+    textarea {
+        @apply bg-transparent;
+    }
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-200%);
+    }
+}
+
+.animate-slide {
+    display: inline-block;
+    white-space: nowrap;
+    animation: slide 2s linear infinite;
+}
+
+.font-barlow {
+    font-family: "Barlow", sans-serif;
+}
+
+.auth-flex {
+    @apply flex flex-col items-center justify-start w-full sm:h-screen bg-cgray-25;
+}
+
+.seed-phrase-cont {
+    grid-template-columns: repeat(4, auto);
+}
+
+.glassmorphism {
+    @apply bg-[#f1f1f1]/10;
+    backdrop-filter: blur(10px); /* Adjust the blur intensity as needed */
+    border-radius: 10px;
+  }
+
+.assets-container > button,
+.assets-container > a {
+    @apply flex flex-row items-center justify-between w-full gap-4 py-3 border-t px-3 border border-cgray-300;
+}
+
+.assets-container > button:first-child,
+.assets-container > a:first-child {
+    @apply border-t rounded-t-md;
+}
+
+.assets-container > button:last-child,
+.assets-container > a:last-child {
+    @apply rounded-b-md;
+}
+
+.assets-container > button:not(:last-child),
+.assets-container > a:not(:last-child) {
+    @apply border-b-0;
+}
+
+.qr-container image {
+    @apply border-4 border-white rounded-full;
+}
+
+#reader > video {
+    height: 500px;
+    object-fit: cover;
+    object-position: center;
+}

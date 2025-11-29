@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: Cashew by Sendtokens # Replace with your desired database name
+      POSTGRES_USER: postgres # Replace with your desired username
+      POSTGRES_PASSWORD: password
