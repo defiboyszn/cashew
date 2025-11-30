@@ -20,6 +20,23 @@ import useBrowserSession from "@/app/hooks/useBrowserSession";
 import { Hex, stringToHex } from "viem";
 import { getPrice } from "@/app/contracts/price";
 import { sendToken } from "@/app/contracts/erc20";
+import Icon from "@/components/global/icons";
+
+// Token configuration
+const SUPPORTED_TOKENS = {
+  USDT: {
+    name: "USDT",
+    symbol: "USDT",
+    address: "0x27aB765e4c3FF46F803027cbF1d0fD7c9f141D98",
+    color: "bg-green-300"
+  },
+  USDC: {
+    name: "USDC",
+    symbol: "USDC",
+    address: "0xd4E644d10aB870225df1271edD5f28b34ff94068",
+    color: "bg-blue-300"
+  }
+};
 
 function calculatePercentage(amount: number, percentage = 10) {
   if (
@@ -46,6 +63,7 @@ function TopupComp() {
   const [buyAmount, setBuyAmount] = useState(0);
   const [loading, setLoading] = useState<boolean>(false);
   const [amount, setAmount] = useState<number>(0);
+  const [selectedToken, setSelectedToken] = useState<keyof typeof SUPPORTED_TOKENS>("USDT");
   const [network] = useLocalStorage<any>(
     "network",
     networkSettings[defaultNetwork]
@@ -80,8 +98,6 @@ function TopupComp() {
     $fetch("https://api.paycrest.io/v1/rates/usdt/1/ngn").then(
       (data) => {
         const ngn_usdt = roundNumber(Number(data.data));
-        console.log(data);
-
         setNRate(1 / ngn_usdt);
         setNGNRate(ngn_usdt);
       }
@@ -125,8 +141,7 @@ function TopupComp() {
         accountTo: pubKey,
         network: network?.name,
         amount: amount,
-        address: "0x27aB765e4c3FF46F803027cbF1d0fD7c9f141D98"
-
+        address: SUPPORTED_TOKENS[selectedToken].address as `0x${string}`
       })
         .then(({ successData }) => {
           setStep(1);
@@ -141,8 +156,6 @@ function TopupComp() {
   const onClose = () => {
     setLoading(false);
   };
-
-
 
   const checkRate = async () => {
     setIsCalculating(true)
@@ -173,12 +186,6 @@ function TopupComp() {
     });
   };
 
-  // useEffect(() => {
-  //   if (network?.symbol?.toLowerCase() !== "hlusd") {
-  //     router.push("/");
-  //   }
-  // }, []);
-
   return step === 0 ? (
     <>
       <motion.div
@@ -195,8 +202,33 @@ function TopupComp() {
               Top-up Wallet
             </h1>
             <p className="text-gray-600 font-medium">
-              Buy USDT with Naira via Paystack
+              Buy stablecoins with Naira via Paystack
             </p>
+          </div>
+
+          {/* Token Selection Card */}
+          <div className="bg-white rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 mb-6">
+            <label className="block text-sm font-bold text-black mb-3 uppercase tracking-wide">
+              Select Token
+            </label>
+            <div className="grid grid-cols-2 gap-3">
+              {Object.entries(SUPPORTED_TOKENS).map(([key, token]) => (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => setSelectedToken(key as keyof typeof SUPPORTED_TOKENS)}
+                  className={`p-4 border-4 border-black rounded-xl font-bold transition-all ${selectedToken === key
+                      ? `${token.color} shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`
+                      : "bg-gray-100 hover:bg-gray-200"
+                    }`}
+                >
+                  <div className="flex items-center justify-center gap-2">
+                    <Icon className="w-8 h-8" name={token.symbol} cName={token?.name} />
+                    <span className="text-lg text-black">{token.name}</span>
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Main Form Card */}
@@ -259,14 +291,6 @@ function TopupComp() {
 
             {/* You'll Receive */}
             <div className="mb-6 p-4 bg-green-100 border-3 border-black rounded-xl">
-              {/* {isCalculating && (
-                <div className="absolute inset-0 bg-green-200/80 flex items-center justify-center backdrop-blur-sm z-10">
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 border-3 border-black border-t-transparent rounded-full animate-spin"></div>
-                    <span className="font-bold text-black text-sm">Calculating...</span>
-                  </div>
-                </div>
-              )} */}
               <div className="flex justify-between items-center">
                 <span className="text-sm font-bold text-black uppercase">
                   You'll Receive
@@ -277,13 +301,16 @@ function TopupComp() {
                       Calculating...
                     </p>
                     :
-                    <p className="text-2xl font-black text-black">
-                      {amount?.toFixed(1)} USDT
-                    </p>
+                    <div>
+                      <p className="text-2xl font-black text-black flex items-center justify-end gap-2">
+                        <Icon className="w-8 h-8" name={SUPPORTED_TOKENS[selectedToken].symbol} cName={SUPPORTED_TOKENS[selectedToken]?.name} />
+                        <span>{amount?.toFixed(1)} {selectedToken}</span>
+                      </p>
+                      <p className="text-xs font-bold text-gray-600 bg-white border-2 border-black px-2 py-1 rounded-full inline-block mt-1">
+                        Rate: $1 = 1 {selectedToken}
+                      </p>
+                    </div>
                   }
-                  <p className="text-xs font-bold text-gray-600 bg-white border-2 border-black px-2 py-1 rounded-full inline-block mt-1">
-                    Rate: $1 = 1 USDT
-                  </p>
                 </div>
               </div>
             </div>
@@ -291,20 +318,21 @@ function TopupComp() {
 
           {/* Order Details Card */}
           <div className="bg-white rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 mb-6">
-            {/* {isCalculating && (
-              <div className="absolute inset-0 bg-white/80 flex items-center justify-center backdrop-blur-sm z-10">
-                <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
-                  <span className="font-black text-black">Updating fees...</span>
-                </div>
-              </div>
-            )} */}
             <h3 className="text-xl font-black text-black mb-4 flex items-center gap-2">
               <span className="text-2xl">📋</span>
               Order Details
             </h3>
 
             <div className="space-y-3">
+              {/* Token */}
+              <div className="flex justify-between items-center py-3 border-b-3 border-gray-200">
+                <span className="font-bold text-gray-700">Token</span>
+                <div className={`px-3 py-1 ${SUPPORTED_TOKENS[selectedToken].color} border-2 border-black rounded-full font-black text-black flex items-center gap-1`}>
+                <Icon className="w-8 h-8" name={SUPPORTED_TOKENS[selectedToken].symbol} cName={SUPPORTED_TOKENS[selectedToken]?.name} />
+                  <span>{selectedToken}</span>
+                </div>
+              </div>
+
               {/* Processing Fee */}
               <div className="flex justify-between items-center py-3 border-b-3 border-gray-200">
                 <span className="font-bold text-gray-700">Processing Fee</span>
@@ -313,7 +341,6 @@ function TopupComp() {
                     ₦
                     {(
                       roundNumber(
-
                         (ngn_rate * 0.5) + calculatePercent(Number($amount.replace(/,/g, "")))
                       )
                     )?.toLocaleString()}
@@ -321,7 +348,6 @@ function TopupComp() {
                   <p className="text-xs text-gray-600">
                     3% + $0.5 = $
                     {roundNumber(
-
                       (0.5 + calculatePercent(Number($amount.replace(/,/g, ""))) /
                         ngn_rate)
                     )?.toLocaleString()}
@@ -374,19 +400,19 @@ function TopupComp() {
                 <ul className="space-y-2 text-sm text-gray-700 font-medium">
                   <li className="flex items-start gap-2">
                     <span className="text-black font-black">1.</span>
-                    Enter your email and amount (minimum ₦1,000)
+                    Select your preferred stablecoin (USDT or USDC)
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-black font-black">2.</span>
-                    Complete payment via Paystack (card or bank transfer)
+                    Enter your email and amount (₦1,000 - ₦10,000)
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-black font-black">3.</span>
-                    USDT will be sent to your wallet automatically
+                    Complete payment via Paystack (card or bank transfer)
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-black font-black">4.</span>
-                    Processing usually takes about 1 minute
+                    Tokens will be sent to your wallet automatically (~1 min)
                   </li>
                 </ul>
               </div>
@@ -398,7 +424,7 @@ function TopupComp() {
   ) : (
     <>
       <motion.div
-        className="min-h-screen bg-gray-50 flex items-center justify-center px-4"
+        className="min-h-screen flex items-center justify-center px-4"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0 }}
@@ -437,17 +463,18 @@ function TopupComp() {
               <p className="text-sm font-bold text-gray-700 mb-2 uppercase">
                 Added to your wallet
               </p>
-              <p className="text-4xl font-black text-black">
-                {amount?.toFixed(1)}
+              <p className="text-4xl font-black text-black flex items-center justify-center gap-2">
+              <Icon className="w-8 h-8" name={SUPPORTED_TOKENS[selectedToken].symbol} cName={SUPPORTED_TOKENS[selectedToken]?.name} />
+                <span>{amount?.toFixed(1)}</span>
               </p>
               <p className="text-xl font-bold text-black mt-1">
-                USDT
+                {selectedToken}
               </p>
             </div>
 
             <p className="text-gray-600 font-medium mb-6">
               Your wallet has been successfully topped up. You can now use your{" "}
-              USDT for transactions.
+              {selectedToken} for transactions.
             </p>
 
             {/* Continue Button */}

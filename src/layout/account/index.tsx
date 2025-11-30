@@ -21,7 +21,7 @@ function AuthLayout({children}: any) {
         <RootLayout>
             {/* <GlobalNavbar/> */}
             <AnimatePresence>
-                <div className="pt-12 pb-12 auth-flex">{children}</div>
+                <div className="pt-5 pb-12 auth-flex">{children}</div>
             </AnimatePresence>
         </RootLayout>
 

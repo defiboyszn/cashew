@@ -15,10 +15,10 @@ export interface NetworkSetting {
 export const defaultTokens: TokenAddresses =
   process.env.NEXT_PUBLIC_ENVIRONMENT === "production"
     ? {
-      camp: ["0x27aB765e4c3FF46F803027cbF1d0fD7c9f141D98",],
+      camp: ["0x27aB765e4c3FF46F803027cbF1d0fD7c9f141D98", "0xd4E644d10aB870225df1271edD5f28b34ff94068"],
     }
     : {
-     camp: ["0x27aB765e4c3FF46F803027cbF1d0fD7c9f141D98",],
+     camp: ["0x27aB765e4c3FF46F803027cbF1d0fD7c9f141D98", "0xd4E644d10aB870225df1271edD5f28b34ff94068"],
     };
 
 export const networkSettings: Record<string, NetworkSetting> = {

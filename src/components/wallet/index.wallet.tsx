@@ -87,7 +87,7 @@ const AccountWalletComp = (function AccountWalletComp() {
 
         {/* Balance Display */}
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-4">
+          <div onClick={() => setShow(!show)} className="flex items-center cursor-pointer justify-center gap-4">
             {show ? (
               <h1 className="text-6xl font-black text-black">
                 ${useDollar(totalBalance)?.replace("$", "")}
@@ -102,7 +102,7 @@ const AccountWalletComp = (function AccountWalletComp() {
                   : "*****"}
               </h1>
             )}
-            <button
+            {/* <button
               onClick={() => setShow(!show)}
               className="p-2 rounded-full transition-all"
             >
@@ -142,7 +142,7 @@ const AccountWalletComp = (function AccountWalletComp() {
                   />
                 </svg>
               )}
-            </button>
+            </button> */}
           </div>
         </div>
 

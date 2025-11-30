@@ -84,7 +84,7 @@ const AccountLayout = function AccountLayout({ children }: any) {
               opacity: 0,
             },
           }}
-          className="min-h-screen w-full pt-20"
+          className="min-h-screen w-full pt-5"
         >
           <div className="max-w-2xl px-4 block mx-auto">
             {locked ? (
