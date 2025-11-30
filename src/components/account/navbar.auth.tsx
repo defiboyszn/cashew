@@ -43,7 +43,7 @@ function AuthNavbar() {
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-full z-[9999999] px-4 h-20 sm:px-10 flex items-center justify-between">
+      <div className="fixed top-0 left-0 w-full z-[9999999] px-4 h-12 mt-4 sm:px-10 flex items-center justify-between">
         {/* <Link href="/">
           <div className="h-10 sm:h-8 bg-white border-3 border-black px-3 py-1">
             <img

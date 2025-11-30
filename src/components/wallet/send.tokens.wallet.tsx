@@ -32,6 +32,7 @@ import useBrowserSession from "@/app/hooks/useBrowserSession";
 import { getDomainAddress } from "@/app/contracts/dns";
 import receiptBg from "@/assets/img/receipt-bg.png";
 import { ZeroAddress } from "ethers";
+import Icon from "../global/icons";
 
 interface TokenSendPageProps {
   symbol: string;
@@ -300,7 +301,7 @@ export const SendToken: React.FC<TokenSendPageProps> = ({
                   <label className="block text-sm font-bold text-black mb-2 uppercase tracking-wide">
                     Amount
                   </label>
-                  <div className="relative flex items-center gap-2">
+                  <div className="flex items-center gap-2">
                     <input
                       type="number"
                       placeholder="0.00"
@@ -310,10 +311,10 @@ export const SendToken: React.FC<TokenSendPageProps> = ({
                       })}
                       defaultValue={0}
                       min={0}
-                      className="flex-1 px-4 py-4 text-xl font-bold border-3 border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-yellow-300 bg-gray-50 text-black placeholder:text-gray-400"
+                      className="flex-1 min-w-0 px-3 sm:px-4 py-3 sm:py-4 text-lg sm:text-xl font-bold border-3 border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-yellow-300 bg-gray-50 text-black placeholder:text-gray-400"
                     />
-                    <div className="px-4 py-4 bg-blue-300 border-3 border-black rounded-xl font-black text-black">
-                      {symbol}
+                    <div className="flex-shrink-0 px-3 sm:px-4 py-3 sm:py-4 bg-blue-300 border-3 border-black rounded-xl font-black text-black">
+                      <Icon className="w-6 h-6 sm:w-8 sm:h-8" name={symbol} />
                     </div>
                   </div>
                   <p className="mt-2 text-sm font-bold text-gray-600">
@@ -332,28 +333,28 @@ export const SendToken: React.FC<TokenSendPageProps> = ({
                     Recipient
                   </label>
                   <p className="text-xs text-gray-600 mb-2 font-medium">
-                    Sendtag
+                    Sendtag {"\n\n"}
                     {(network?.symbol?.toLowerCase() === "vic" ||
                       network?.symbol.toLowerCase() === "inj" ||
                       network?.name?.toLowerCase() === "base") &&
                       ", OneID username"}
-                    , or wallet address
+                     or wallet address
                   </p>
-                  <div className="flex gap-2">
+                  <div className="flex items-center gap-2">
                     <input
                       {...register("address")}
                       type="text"
                       placeholder="Enter sendtag or address"
-                      className="flex-1 px-4 py-3 border-3 border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium text-black placeholder:text-gray-400"
+                      className="flex-1 min-w-0 px-3 sm:px-4 py-3 border-3 border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium text-black placeholder:text-gray-400"
                     />
                     <button
                       type="button"
                       onClick={openModal}
-                      className="px-4 py-3 bg-purple-300 border-3 border-black rounded-xl hover:bg-purple-400 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                      className="flex-shrink-0 px-3 sm:px-4 py-3 bg-purple-300 border-3 border-black rounded-xl hover:bg-purple-400 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
+                        className="h-5 w-5 sm:h-6 sm:w-6"
                         viewBox="0 0 24 24"
                         fill="currentColor"
                       >

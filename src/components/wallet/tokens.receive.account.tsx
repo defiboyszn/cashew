@@ -2,7 +2,7 @@ import { Back } from "../global/back.global";
 import copy from '../../assets/icons/copy.svg'
 import copied_img from '../../assets/icons/copied.svg'
 import info from '../../assets/icons/info.svg'
-import send from '@/assets/logos/send-rounded-bordered.svg'
+import cashew from '@/assets/logos/cashew.png'
 import { useState } from "react";
 import dynamic from 'next/dynamic'
 import useLocalStorage from "@/app/hooks/useLocalStorage";
@@ -61,7 +61,7 @@ export function ReceiveTokens(props: any) {
                         {/* QR Code Section */}
                         <div className="p-8 bg-gradient-to-br from-purple-100 to-blue-100 flex justify-center items-center border-b-4 border-black">
                             <div className="bg-white p-4 rounded-xl border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                                <QrCodeComponent data={pubKey} url={send.src} />
+                                <QrCodeComponent data={pubKey} url={cashew.src} />
                             </div>
                         </div>
 
