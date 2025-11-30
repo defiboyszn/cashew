@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "help": "next help",
     "knex:migrate": "knex migrate:latest",
     "knex:rollback": "knex migrate:rollback",
     "knex:make": "knex migrate:make",

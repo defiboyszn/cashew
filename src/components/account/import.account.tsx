@@ -183,13 +183,13 @@ function ImportAccount() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-3 overflow-hidden">
+    <div className="min-h-screen flex items-start justify-start">
       <div className="w-fit">
-        <div className="bg-white rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-3 sm:p-8">
+        <div className="bg-white rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] px-1 py-5 sm:p-8">
           <form onSubmit={handleSubmit(submit)}>
             {/* Step 0: Import Wallet */}
             {formStep === 0 && (
-              <div className="space-y-6">
+              <div className="space-y-6 px-3 sm:px-0">
                 <div>
                   <h1 className="text-3xl sm:text-4xl font-black text-black mb-2">
                     Import Wallet 📂
@@ -227,7 +227,7 @@ function ImportAccount() {
 
             {/* Step 1: Complete Account */}
             {formStep === 1 && (
-              <div className="space-y-6">
+              <div className="space-y-6 px-3 sm:px-0">
                 <button
                   type="button"
                   className="flex items-center gap-2 font-bold text-black hover:text-purple-600 transition-colors"
@@ -245,32 +245,32 @@ function ImportAccount() {
                   Back
                 </button>
 
-                <div>
+                <div className="px-3 sm:px-0">
                   <h2 className="text-2xl sm:text-3xl font-black text-black mb-2">
                     👤 Complete Account
                   </h2>
-                  <p className="text-gray-600 font-medium">
+                  <p className="text-gray-600 font-medium text-sm sm:text-xl text-wrap">
                     Choose your username and secure password
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 px-3 sm:px-0">
                   {/* Username */}
                   <div>
                     <label className="block text-sm font-bold text-black mb-2 uppercase tracking-wide">
                       Username
                     </label>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
                       <input
                         readOnly={domainExists}
                         type="text"
                         {...register("username")}
                         placeholder="yourname"
-                        className={`flex-1 min-w-0 px-3 sm:px-4 py-3 border-4 border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-300 font-bold text-black placeholder:text-gray-400 ${
+                        className={`w-[200px] md:w-full px-3 sm:px-4 py-3 border-4 border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-300 font-bold text-black placeholder:text-gray-400 ${
                           domainExists ? "bg-gray-100 cursor-not-allowed" : ""
                         }`}
                       />
-                      <div className="flex-shrink-0 px-2 sm:px-4 py-3 bg-purple-300 border-4 border-black rounded-xl font-black text-black text-xs sm:text-base whitespace-nowrap">
+                      <div className="flex-shrink-0 px-2 sm:px-4 py-3 bg-purple-300 border-4 border-black rounded-xl font-black text-black text-[14px] whitespace-nowrap">
                         .camp.send
                       </div>
                     </div>
@@ -291,7 +291,7 @@ function ImportAccount() {
                     <label className="block text-sm font-bold text-black mb-2 uppercase tracking-wide">
                       Password
                     </label>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
                       <input
                         {...register("password")}
                         type={see ? "text" : "password"}
@@ -355,14 +355,14 @@ function ImportAccount() {
 
             {/* Buttons */}
             {formStep !== 2 && (
-              <div className="mt-8">
+              <div className="mt-8 px-3 sm:px-0">
                 {renderButton()}
               </div>
             )}
 
             {/* Generate New Wallet Option (Step 0) */}
             {formStep === 0 && (
-              <div className="mt-8">
+              <div className="mt-8 px-3 sm:px-0">
                 <div className="flex items-center gap-4 my-6">
                   <div className="h-1 bg-black flex-1"></div>
                   <span className="font-bold text-black uppercase text-sm">Or</span>
