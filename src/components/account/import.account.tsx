@@ -185,13 +185,13 @@ function ImportAccount() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
-        <div className="bg-white rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8">
+        <div className="bg-white rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 sm:p-8">
           <form onSubmit={handleSubmit(submit)}>
             {/* Step 0: Import Wallet */}
             {formStep === 0 && (
               <div className="space-y-6">
                 <div>
-                  <h1 className="text-4xl font-black text-black mb-2">
+                  <h1 className="text-3xl sm:text-4xl font-black text-black mb-2">
                     Import Wallet 📂
                   </h1>
                   <p className="text-gray-600 font-medium">
@@ -246,7 +246,7 @@ function ImportAccount() {
                 </button>
 
                 <div>
-                  <h2 className="text-3xl font-black text-black mb-2">
+                  <h2 className="text-2xl sm:text-3xl font-black text-black mb-2">
                     👤 Complete Account
                   </h2>
                   <p className="text-gray-600 font-medium">
@@ -260,17 +260,17 @@ function ImportAccount() {
                     <label className="block text-sm font-bold text-black mb-2 uppercase tracking-wide">
                       Username
                     </label>
-                    <div className="flex gap-2">
+                    <div className="flex items-center gap-2">
                       <input
                         readOnly={domainExists}
                         type="text"
                         {...register("username")}
                         placeholder="yourname"
-                        className={`flex-1 px-4 py-3 border-4 border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-300 font-bold text-black placeholder:text-gray-400 ${
+                        className={`flex-1 min-w-0 px-3 sm:px-4 py-3 border-4 border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-300 font-bold text-black placeholder:text-gray-400 ${
                           domainExists ? "bg-gray-100 cursor-not-allowed" : ""
                         }`}
                       />
-                      <div className="px-4 py-3 bg-purple-300 border-4 border-black rounded-xl font-black text-black whitespace-nowrap flex items-center">
+                      <div className="flex-shrink-0 px-2 sm:px-4 py-3 bg-purple-300 border-4 border-black rounded-xl font-black text-black text-xs sm:text-base whitespace-nowrap">
                         .camp.send
                       </div>
                     </div>
@@ -291,24 +291,24 @@ function ImportAccount() {
                     <label className="block text-sm font-bold text-black mb-2 uppercase tracking-wide">
                       Password
                     </label>
-                    <div className="relative">
+                    <div className="flex items-center gap-2">
                       <input
                         {...register("password")}
                         type={see ? "text" : "password"}
                         placeholder="Enter secure password"
-                        className="w-full px-4 py-3 pr-12 border-4 border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-300 font-bold text-black placeholder:text-gray-400"
+                        className="flex-1 min-w-0 px-3 sm:px-4 py-3 border-4 border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-300 font-bold text-black placeholder:text-gray-400"
                       />
                       <button
                         type="button"
                         onClick={() => setSee(!see)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 p-2 bg-cyan-300 border-2 border-black rounded-lg hover:bg-cyan-400 transition-colors"
+                        className="flex-shrink-0 px-3 sm:px-4 py-3 bg-cyan-300 border-4 border-black rounded-xl hover:bg-cyan-400 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
                       >
                         {see ? (
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
                           </svg>
                         ) : (
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                           </svg>
@@ -331,7 +331,7 @@ function ImportAccount() {
                       {...register("confirmPassword")}
                       type={see ? "text" : "password"}
                       placeholder="Re-enter password"
-                      className="w-full px-4 py-3 border-4 border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-300 font-bold text-black placeholder:text-gray-400"
+                      className="w-full px-3 sm:px-4 py-3 border-4 border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-300 font-bold text-black placeholder:text-gray-400"
                     />
                     {errors.confirmPassword && (
                       <p className="mt-2 text-sm font-bold text-red-600 bg-red-100 border-2 border-red-500 px-3 py-1 rounded-lg inline-block">
