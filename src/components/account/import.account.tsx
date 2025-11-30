@@ -183,9 +183,9 @@ function ImportAccount() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl">
-        <div className="bg-white rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 sm:p-8">
+    <div className="min-h-screen flex items-center justify-center p-3 overflow-hidden">
+      <div className="w-fit">
+        <div className="bg-white rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-3 sm:p-8">
           <form onSubmit={handleSubmit(submit)}>
             {/* Step 0: Import Wallet */}
             {formStep === 0 && (
